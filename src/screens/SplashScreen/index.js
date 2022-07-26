@@ -1,26 +1,22 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { StatusBar } from 'react-native-web';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, StatusBar } from 'react-native';
 
 import { Text } from '../../components';
 import { Logo } from '../../components';
+import { Container } from '../../components';
 
-export const SplashScreen = () =>  {
+export const SplashScreen = ({ navigation }) =>  {
+  useEffect(()=> {
+    setTimeout(() => {
+      navigation.navigate('Home')
+    },1000)
+  },[navigation]);
+
   return (
-    <View style={styles.container}>
+    <Container align="center" justify="center">
       <Logo/>
       <Text>Start Wars - Wiki</Text>
-      <StatusBar style="auto"/>
-    </View>
+    </Container>
   );
 }
 
-
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    backgroundColor: '#161616',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
