@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 
 export const CustomText = styled.Text`
-    font-size: ${({ fontSize }) => fontSize  || '24px'}
-    color: ${({ color }) => color || 'white'};
-    font-weight: bold;
-    margin-top: 12px;
+    font-size: ${({ theme }) => theme.metrics.px(24)}px;
+    color: ${({ color, theme }) => color || theme.colors.red};
+    font-family: SourceSansPro_400Regular;
+    margin-top: ${({ theme }) => theme.metrics.px(12)}px;
 `
