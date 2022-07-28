@@ -2,10 +2,14 @@ import React from 'react';
 import { LogoImage } from './styles';
 import logoImage from '../../../../assets/p1.png';
 
+const sizes = {
+    small: 28,
+    large: 64,
+}
 
-export const Logo = () => {
+export const Logo = ({size}) => {
     return(
-        <LogoImage source={logoImage}/>
+        <LogoImage source={logoImage} size={sizes[size || 'large']}/>
     )
 }
 

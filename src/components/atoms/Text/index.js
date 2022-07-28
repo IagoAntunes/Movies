@@ -1,9 +1,9 @@
 import React from "react";
 import { CustomText } from './style'
 
-export const Text = ({ children, color, fontSize }) => {
+export const Text = ({ children, fontSize, ...props }) => {
     return (
-        <CustomText color={color} fontSize={fontSize}>
+        <CustomText {...props} fontSize={fontSize}>
             {children}
         </CustomText>
     )
