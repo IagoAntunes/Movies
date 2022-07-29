@@ -4,22 +4,30 @@ import { colors} from '../../../styles/colors'
 import { Tag, IconButton, PlayButton } from '../../../components/molecules'
 import { Text, Logo, } from '../../../components/atoms'
 
-export const Hero = () => {
+export const Hero = ({ item, onDetail }) => {
+    const { image_url, title, subtitle, type} = item;
     return (
         <HeroContainer>
             <HeroImageBackground source={{
-                uri: 'https://sm.ign.com/ign_br/screenshot/default/darth-vader_5yvm.jpg'
+                uri: image_url,
                 }}
             >
                 <HeroGradient colors={[colors.dark, 'transparent', colors.dark]}>
-                    <Logo size= 'small'/>
-                    <Tag mt={200}>Filme</Tag>
-                    <Text fontFamily='bold' size={28} mt={12}>Episodio I</Text>
-                    <Text size={18}>A ameaça Fantasma</Text>
+                    {
+                    !onDetail && <Logo size= 'small'/>
+                    }
+                    
+                    <Tag mt={onDetail ? 224 : 200}>{type}</Tag>
+                    <Text fontFamily='bold' size={28} mt={12}>{title}</Text>
+                    <Text size={18}>{subtitle}</Text>
                     <ButtonsView>
                         <IconButton label='Favoritos' iconName='add-circle-outline'/>
                         <PlayButton/>
-                        <IconButton label='Saiba Mais' iconName='information-circle-outline'/>
+                        {
+                            !onDetail && 
+                                <IconButton label='Saiba Mais' iconName='information-circle-outline'/>
+                        }
+                        
                     </ButtonsView>
                 </HeroGradient>
             </HeroImageBackground>
