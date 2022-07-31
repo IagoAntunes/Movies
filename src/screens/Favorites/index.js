@@ -1,11 +1,23 @@
-import React from "react";
-
+import React , { useEffect}from "react";
+import { useFavorites } from "../../services/hooks";
 import { ScreenScrollContainer,Text } from "../../components";
 
-export const FavoritesScreen = () =>{
+export const FavoritesScreen = ({ navigation }) =>{
+    const {getFavorites} = useFavorites()
+
+    const callGetFavorites = async() => {
+        const favorites = await getFavorites()
+    }
+    useEffect(() => { 
+        const unsubscribe = navigation.addListener('focus',() =>{
+            callGetFavorites()
+        }) 
+        return unsubscribe
+    },[])
+
     return(
-        <ScreenScrollContainer>
-            <Text>Favoritos</Text>
+        <ScreenScrollContainer widthPadding>
+            <Text fontFamily="bold" size={28}>Favoritos</Text>
         </ScreenScrollContainer>
     )
 }

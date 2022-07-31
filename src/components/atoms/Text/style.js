@@ -9,6 +9,6 @@ export const CustomText = styled.Text`
     margin-bottom: ${({ theme, mb }) => theme.metrics.px(mb || 0)}px;
     margin-left: ${({ theme, ml }) => theme.metrics.px(ml || 0)}px;
     margin-right: ${({ theme, mr }) => theme.metrics.px(mr || 0)}px;
-    line-heght: ${({ lh,size, theme}) => theme.metrics.px(lh || size || 24)}px
+    line-height: ${({ lh,size, theme}) => theme.metrics.px(lh || size || 24)}px
 
 `

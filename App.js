@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React from 'react'
 import AppLoading from 'expo-app-loading'
 import { ThemeProvider } from 'styled-components'
@@ -12,7 +13,7 @@ import {
 import { theme } from './src/styles'
 import { Routes } from './src/routes'
 
-// AsyncStorage.clear()
+//AsyncStorage.clear()
 
 export default function App() {
   let [fontsLoaded] = useFonts({

@@ -1,39 +1,63 @@
-import { api } from '../api'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const DB_KEY = '@StarWarsWiki:favorites'
 
-
 export const useFavorites = () => {
-    const addFavorite = async (data) => {
-        let newDb;
-        const value = await AsyncStorage.getItem(DB_KEY)
-        if (!value) {//ja existe um BD
-            const db = JSON.parse(value)
-            newDb = Array[db].push(data)
-
-        } else {//Criar BD
-            newDb = [data]
-        }
-        const jsonValue = JSON.stringify(newDb)
-        await AsyncStorage.setItem(DB_KEY, jsonValue)
-
-        return newDb
+  const addFavorite = async (data) => {
+    try {
+      let newDb
+      const value = await AsyncStorage.getItem(DB_KEY)
+      if (value !== null) {
+        // já existe um banco de dados
+        const db = JSON.parse(value)
+        newDb = [...db, data]
+      } else {
+        // preciso criar um novo banco de dados
+        newDb = [data]
+      }
+      const jsonValue = JSON.stringify(newDb)
+      await AsyncStorage.setItem(DB_KEY, jsonValue)
+      return newDb
+    } catch (error) {
+      console.log({ error })
+      return { error }
     }
+  }
 
-    const getFavorites = async() => {
-        const value = await AsyncStorage.getItem(DB_KEY)
-        if (!value) {//ja existe um BD
-            const db = JSON.parse(value)
-            return db
-
-        } else {//Criar BD
-            return []
-        }
+  const getFavorites = async () => {
+    const value = await AsyncStorage.getItem(DB_KEY)
+    if (value !== null) {
+      const db = JSON.parse(value)
+      return db
     }
+    return []
+  }
 
-    return {
-        addFavorite,
-        getFavorites
+  const removeFavorite = async (data) => {
+    try {
+      let newDb
+      const value = await AsyncStorage.getItem(DB_KEY)
+      if (value !== null) {
+        // já existe um banco de dados
+        const db = JSON.parse(value)
+        newDb = db.filter((fv) => fv.id !== data.id && fv.title !== data.title)
+      } else {
+        // preciso criar um novo banco de dados
+        newDb = []
+      }
+
+      const jsonValue = JSON.stringify(newDb)
+      await AsyncStorage.setItem(DB_KEY, jsonValue)
+      return newDb
+    } catch (error) {
+      console.log({ error })
+      return { error }
     }
+  }
+
+  return {
+    addFavorite,
+    removeFavorite,
+    getFavorites,
+  }
 }
